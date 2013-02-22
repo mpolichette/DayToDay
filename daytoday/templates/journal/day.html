@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div id="entry">
+	<div id="date_header">
+        {% include "journal/_date_marker.html" %}
+	</div>
+    <div>
+        <h1>How was your day?</h1>
+        <div>
+            <input type="radio" name="dayrating"
+        </div>
+    </div>
+</div>
+{% endblock %}

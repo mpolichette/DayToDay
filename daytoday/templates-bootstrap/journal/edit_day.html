@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load journal_extras %}
+
+{% get_today as today %}
+
+{% block content %}
+<div class="entry">
+    <p class="muted">{{ form.instance.date }}</p>
+        {% if not form.needs_rating %}
+            <h1>{{form.instance.date|naturalday:'N d'|capfirst}} was {{form.instance|rating_display:'auto'|lower}}</h1>
+        {% else %}
+            <h1>How was your day {{form.instance.date|naturalday:'\o\n N d'}}?</h1>
+        {% endif %}
+        <form action="/day/{{form.instance.date|date:'m-d-Y'}}/edit/" method="POST">
+            {% csrf_token %}
+            {% if form.in_edit_mode and not form.needs_rating %}
+            <h4>Has your outlook changed?</h4>
+            {% endif %}
+            <div class="day-rating{% if not form.needs_rating and not form.edit_mode %} hidden{% endif %}">
+                {{ form.rating }}
+                <div id="rating-bar"class="btn-toolbar">
+                    {% for value, text in form.rating.field.choices %}
+                    <button class="btn btn-large btn-{{value}}" type="submit" name="rating" value="{{value}}">{{text}}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if not form.needs_rating or form.in_edit_mode %}
+            <div class="row entry-detail">
+                <div class="control-group span8">
+                    <label class="control-label" for="id_summary">What Happened?</label>
+                    {{ form.summary}}
+                </div>
+                <div class="control-group span8">
+                    <button class="btn btn-primary" type="button">Add Activity</button>
+                    <button class="btn btn-primary pull-right" type="submit">Save Comment</button>
+                </div>
+            </div>
+            {% endif %}
+        </form>
+    <div class="">
+
+    </div>
+
+</div>
+{% endblock %}

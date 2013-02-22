@@ -1,0 +1,16 @@
+- model: auth.user
+  pk: 100000
+  fields:
+    first_name: Matt
+    last_name: Polichette
+    username: mpolichette
+    email: matt@polichette.com
+    is_superuser: yes
+    is_staff: yes
+    password: 'pbkdf2_sha256$10000$mLDDmtximids$VHQZACv4LcIF5xiP8fna+SR1B4cRB64Hf6x5t70Mqg8='
+
+#- model: account.userprofile
+#  pk: 1
+#  fields:
+#    accepted_eula: yes
+#    user: 100000

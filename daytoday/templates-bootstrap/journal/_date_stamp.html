@@ -1,0 +1,21 @@
+
+{% load humanize %}
+<ul class="date-stamp" >
+	{# This will use a date_marker object in the context, one of the properties will be date_delta which can be checked#}
+	<li id="top">
+		{% if date_delta.days <= 1 and date_delta.days >= -1%}
+		{{ date|date:'F' }}
+		{% elif date_delta.days <= 7 %}
+		{{ date|date:'D, N' }}
+		{% else %}
+		{{ date|date:'F' }}
+		{% endif %}
+		{# If yesterday thru tomorrow, or greater than a week out, do month long form, otherwise do dayofweek and month abrv. #}
+	</li>
+	<li id="number">
+		{{ date|date:'j' }}
+	</li>
+	<li id="relation">
+		{{ date|naturalday:'Y'|title}}
+	</li>
+</ul>

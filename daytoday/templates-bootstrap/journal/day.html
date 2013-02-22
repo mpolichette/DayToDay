@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load journal_extras %}
+
+{#{% get_today as today %}#}
+
+{% block content %}
+<div class="entry">
+        <a class="text-info pull-right" href="{{ entry.get_edit_url }}"><span>Edit <i class="icon-edit"></i></span></a>
+        <p class="muted">{{ entry.date }}</p>
+        <h1>{{entry.date|naturalday:'N d'|capfirst}} was {{entry|rating_display:'auto'|lower}}</h1>
+        {% if entry.summary %}
+        <div class="row entry-detail">
+            <div class="control-group span8">
+                <h5>This is what happened:</h5>
+                <p class="summary">{{ entry.summary }}</p>
+            </div>
+        </div>
+        {% endif %}
+    <div class="row">
+        <div class="control-group span8">
+            <a class="pull-right" href="{{ entry.get_edit_url }}"><button class="btn btn-primary" type="button">Add Details</button></a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

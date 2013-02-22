@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load journal_extras %}
+
+{% block content %}
+<div class="entry">
+    <p class="muted">{{ date }}</p>
+    <h1>Sorry bro, wait till {{date|naturalday:'N d'}}.</h1>
+</div>
+{% endblock %}

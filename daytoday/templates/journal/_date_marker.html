@@ -1,0 +1,26 @@
+
+{% load humanize %}
+<div id="date_marker">
+	{# This will use a date_marker object in the context, one of the properties will be date_delta which can be checked#}
+	<div id="top">
+		{% if date_delta.days <= 1 and date_delta.days >= -1%}
+		{{ date|date:'F' }}
+		{% elif date_delta.days <= 7 %}
+		{{ date|date:'D, N' }}
+		{% else %}
+		{{ date|date:'F' }}
+		{% endif %}
+		{# If yesterday thru tomorrow, or greater than a week out, do month long form, otherwise do dayofweek and month abrv. #}
+	</div>
+	<div id="number">
+		{{ date|date:'j' }}
+	</div>
+	<div id="relation">
+		{% if date_delta.days <= 1 and date_delta.days >= -1%}
+		{{ date|naturalday|title}}
+		{% else %}
+		{{ date|date:'Y'}}
+		{% endif %}
+		{# Use humanize natural day, if yesterday through tomorrow, otherwise, if within a week, do natural time, otherwise do year #}
+	</div>
+</div>

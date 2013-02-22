@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}DayToDay{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <script src="{% static 'js/vendor/modernizr-2.6.2.min.js' %}"></script>
+
+        <!-- JQUI Theme -->
+        <link href="{% static 'css/cupertino/jquery-ui-1.9.1.custom.css' %}" rel="stylesheet">
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="container">
+            <div class="header clearfix">
+                <div class="left">
+                    <h1>DayToDay</h1>
+                </div>
+                <div class="right">
+                    {% block nav-global %}
+                    <div class="top clearfix">
+                        <div class="nav">
+                            <a href="{% url today %}">Today</a>
+                            {% if user.is_staff %}
+                            <a href="{% url admin:index %}">Admin</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div id="search">
+                            <span>Go to day:</span>
+                            <input id="gotodate" class="dtd_dp" type=text/>
+                        </div>
+                    </div>
+                    {% endblock %}
+                </div>
+            </div>
+            {% comment %}
+            {% block leftbar %}
+            <div id="leftbar">
+                <div class="calendar">
+                    {{ mycalendar }}
+                </div>
+                <div id="nav"></div>
+            </div>
+            {% endblock %}
+            {% endcomment %}
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+
+        <!-- Commented out below in devmode ->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-1.8.2.min.js' %}"><\/script>')</script>
+        -->
+        <!-- Comment out below in production -->
+        <script src="{% static 'js/vendor/jquery-1.8.2.js' %}"></script>
+        <script src="{% static 'js/vendor/jquery-ui-1.9.1.custom.js' %}"></script>
+
+        <!-- Always here -->
+        <script src="{% static 'js/plugins.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

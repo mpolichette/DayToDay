@@ -1,0 +1,53 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+    <title>{{title|default:"Default Title"}}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=MacRoman">
+    <link href='{% static "css/login.css" %}' rel="stylesheet" type="text/css"/>
+    <link href='{% static "css/blitzer/jquery-ui-1.8.21.custom.css" %}' rel="stylesheet" type="text/css"/>
+    <script type='text/javascript' src='{% static "js/jquery-1.7.2.min.js" %}'></script>
+    <script type='text/javascript' src='{% static "js/jquery-ui-1.8.21.custom.min.js" %}'></script>
+    </head>
+    <body>
+        <div id="login_container">
+            <div id="login_top">
+                <h1>Please login:</h1>
+            </div>
+            <div id="login_bottom">
+
+                {% if form.errors %}
+                <p class="error">Sorry, that's not a valid username or password</p>
+                {% endif %}
+
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next|escape }}" />
+                    <table id="login_table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label for="username">User name:</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="username" value="" id="username">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="password">Password:</label>
+                                </td>
+                                <td>
+                                    <input type="password" name="password" value="" id="password">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <input type="submit" value="login" />
+                </form>
+            </div>
+        </div>
+    </body>
+
+</html>
